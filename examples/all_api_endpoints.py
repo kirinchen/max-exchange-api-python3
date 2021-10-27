@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from max.client import Client
+from ..max.client import Client
 
 if __name__ == '__main__':
     client = Client('PUY_MY_API_KEY_HERE', 'PUY_MY_API_SECRET_HERE')

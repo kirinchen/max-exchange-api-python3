@@ -118,8 +118,8 @@ class Client(object):
         # ssl._create_default_https_context = ssl._create_unverified_context
 
         """
-        root@kali:/tmp/max-exchange-api-python3# export HTTPS_PROXY=https://127.0.0.1:8080
-        root@kali:/tmp/max-exchange-api-python3# /usr/bin/python3 all_api_endpoints.py
+        root@kali:/tmp/max_exchange_api_python3# export HTTPS_PROXY=https://127.0.0.1:8080
+        root@kali:/tmp/max_exchange_api_python3# /usr/bin/python3 all_api_endpoints.py
         """
         # End: Debugging with BurpSuite only
 
