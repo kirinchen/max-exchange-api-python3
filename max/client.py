@@ -4,12 +4,14 @@ import base64
 import hashlib
 import hmac
 import json
+from typing import List
 
 from urllib.parse import urlencode
 from urllib.request import Request
 from urllib.request import urlopen
 
 from .constants import *
+from .dto.position import Position
 from .helpers import *
 
 
@@ -299,14 +301,15 @@ class Client(object):
 
         return self._send_request('private', 'GET', f"members/accounts/{currency.lower()}")
 
-    def get_private_account_balances(self):
+    def get_private_account_balances(self) -> List[Position]:
         """
         https://max.maicoin.com/documents/api_list#!/private/getApiV2MembersAccounts
 
         :return: a list contains all coins balance
         """
 
-        return self._send_request('private', 'GET', 'members/accounts')
+        result: List[object] = self._send_request('private', 'GET', 'members/accounts')
+        return [Position(**p.__dict__) for p in result]
 
     # TODO: this is a deprecated endpoint
     def get_private_deposit_address(self, currency=''):
@@ -776,7 +779,7 @@ class Client(object):
         }
 
         return self._send_request('private', 'POST', 'withdrawal', {}, form)
-    
+
     def set_private_deposit_address(self, currency):
         """
         https://max.maicoin.com/documents/api_list#!/private/postApiV2DepositAddresses
