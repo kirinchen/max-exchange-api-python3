@@ -309,7 +309,7 @@ class Client(object):
         """
 
         result: List[object] = self._send_request('private', 'GET', 'members/accounts')
-        return [Position(**p.__dict__) for p in result]
+        return [Position(**p) for p in result]
 
     # TODO: this is a deprecated endpoint
     def get_private_deposit_address(self, currency=''):
