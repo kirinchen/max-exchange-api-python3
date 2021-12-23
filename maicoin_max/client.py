@@ -11,6 +11,7 @@ from urllib.request import Request
 from urllib.request import urlopen
 
 from .constants import *
+from .dto.order import Order
 from .dto.position import Position
 from .helpers import *
 
@@ -103,7 +104,7 @@ class Client(object):
         # Fix "401 Payload is not consistent .."
         # state[]=cancel&state[]=wait&state[]=done
         # {"path": "/api/v2/orders.json", "state": ["cancel", "wait", "done"]}
-        for key in body:
+        for key in dict(body):
             if type(body[key]) is list and not key[-2:] == '[]':
                 body[f"{key}[]"] = body.pop(key)
 
@@ -445,7 +446,7 @@ class Client(object):
             return self._send_request('private', 'GET', 'order', {'id': _id})
 
     def get_private_order_history(self, pair, state=None, sort='asc', pagination=True,
-                                  page=1, limit=100, offset=0, group_id=''):
+                                  page=1, limit=100, offset=0, group_id='') -> List[Order]:
         """
         https://max.maicoin.com/documents/api_list#!/private/getApiV2Orders
 
@@ -479,7 +480,7 @@ class Client(object):
         if group_id is not None and type(group_id) is int:
             query['group_id'] = group_id
 
-        return self._send_request('private', 'GET', 'orders', query)
+        return [Order(**d) for d in self._send_request('private', 'GET', 'orders', query)]
 
     def get_private_reward_history(self, currency='', _from='', to='', _type='',
                                    pagination=False, page=1, limit=50, offset=0):
