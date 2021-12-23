@@ -25,7 +25,7 @@ And this wrapper does not receive active maintainance, plaese consider using [CC
 
 ```bash
 cd ~/ && git clone https://github.com/kulisu/max-exchange-api-python3
-cd ~/max-exchange-api-python3 && cp examples/all_api_endpoints.py .
+cd ~/maicoin_max-exchange-api-python3 && cp examples/all_api_endpoints.py .
 
 # update API key and secret
 # vim all_api_endpoints.py

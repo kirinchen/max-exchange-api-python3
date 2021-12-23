@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from ..max.client import Client
+from ..maicoin_max.client import Client
 
 if __name__ == '__main__':
     client = Client('PUY_MY_API_KEY_HERE', 'PUY_MY_API_SECRET_HERE')
@@ -83,20 +83,20 @@ if __name__ == '__main__':
         result = client.get_private_withdrawal_history()
         print(f"[I] Invoked get_private_withdrawal_history() API Result: \n    {result}\n")
 
-        # result = client.get_private_account_balance('max')
-        # print(f"[I] Invoked get_private_account_balance('max') API Result: \n    {result}\n")
+        # result = client.get_private_account_balance('maicoin_max')
+        # print(f"[I] Invoked get_private_account_balance('maicoin_max') API Result: \n    {result}\n")
 
         # result = client.get_private_deposit_address()
         # print(f"[I] Invoked get_private_deposit_address() API Result: \n    {result}\n")
 
-        # result = client.get_private_deposit_address('max')
-        # print(f"[I] Invoked get_private_deposit_address('max') API Result: \n    {result}\n")
+        # result = client.get_private_deposit_address('maicoin_max')
+        # print(f"[I] Invoked get_private_deposit_address('maicoin_max') API Result: \n    {result}\n")
 
         # result = client.get_private_deposit_addresses()
         # print(f"[I] Invoked get_private_deposit_addresses() API Result: \n    {result}\n")
 
-        # result = client.get_private_deposit_addresses('max')
-        # print(f"[I] Invoked get_private_deposit_addresses('max') API Result: \n    {result}\n")
+        # result = client.get_private_deposit_addresses('maicoin_max')
+        # print(f"[I] Invoked get_private_deposit_addresses('maicoin_max') API Result: \n    {result}\n")
 
         # result = client.get_private_deposit_detail('0x0123456789abcdef..')
         # print(f"[I] Invoked get_private_deposit_detail('0x0123456789abcdef..') API Result: \n    {result}\n")
@@ -119,14 +119,14 @@ if __name__ == '__main__':
         # result = client.get_private_order_history('maxtwd')
         # print(f"[I] Invoked get_private_order_history('maxtwd') API Result: \n    {result}\n")
 
-        # result = client.get_private_reward_history('max', _type='holding')
-        # print(f"[I] Invoked get_private_reward_history('max', _type='holding') API Result: \n    {result}\n")
+        # result = client.get_private_reward_history('maicoin_max', _type='holding')
+        # print(f"[I] Invoked get_private_reward_history('maicoin_max', _type='holding') API Result: \n    {result}\n")
 
         # result = client.get_private_transfer_detail(12345678901234567)
         # print(f"[I] Invoked get_private_transfer_detail(12345678901234567) API Result: \n    {result}\n")
 
-        # result = client.get_private_transfer_history('max', side='out')
-        # print(f"[I] Invoked get_private_transfer_history('max', side='out') API Result: \n    {result}\n")
+        # result = client.get_private_transfer_history('maicoin_max', side='out')
+        # print(f"[I] Invoked get_private_transfer_history('maicoin_max', side='out') API Result: \n    {result}\n")
 
         # result = client.get_private_withdrawal_addresses('usdt')
         # print(f"[I] Invoked get_private_withdrawal_addresses('usdt') API Result: \n    {result}\n")
