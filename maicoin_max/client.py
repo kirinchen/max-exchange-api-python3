@@ -13,6 +13,7 @@ from urllib.request import urlopen
 from .constants import *
 from .dto.order import Order
 from .dto.position import Position
+from .dto.wallet import Wallet
 from .helpers import *
 
 
@@ -302,7 +303,7 @@ class Client(object):
 
         return self._send_request('private', 'GET', f"members/accounts/{currency.lower()}")
 
-    def get_private_account_balances(self) -> List[Position]:
+    def get_private_account_balances(self) -> List[Wallet]:
         """
         https://max.maicoin.com/documents/api_list#!/private/getApiV2MembersAccounts
 
@@ -310,7 +311,7 @@ class Client(object):
         """
 
         result: List[object] = self._send_request('private', 'GET', 'members/accounts')
-        return [Position(**p) for p in result]
+        return [Wallet(**p) for p in result]
 
     # TODO: this is a deprecated endpoint
     def get_private_deposit_address(self, currency=''):
