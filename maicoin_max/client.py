@@ -11,6 +11,7 @@ from urllib.request import Request
 from urllib.request import urlopen
 
 from .constants import *
+from .dto.market import Candlestick, Trade
 from .dto.order import Order
 from .dto.position import Position
 from .dto.wallet import Wallet
@@ -163,7 +164,7 @@ class Client(object):
         else:
             return self._send_request('public', 'GET', 'tickers')
 
-    def get_public_k_line(self, pair, limit=30, period=1, timestamp=''):
+    def get_public_k_line(self, pair, limit=30, period=1, timestamp='') -> List[Candlestick]:
         """
         https://max.maicoin.com/documents/api_list#!/public/getApiV2K
 
@@ -181,7 +182,8 @@ class Client(object):
             'timestamp': timestamp
         }
 
-        return self._send_request('public', 'GET', 'k', query)
+        result: List[List[float]] = self._send_request('public', 'GET', 'k', query)
+        return [Candlestick(v_list) for v_list in result]
 
     def get_public_markets_summary(self):
         """
@@ -231,7 +233,7 @@ class Client(object):
 
     def get_public_recent_trades(self, pair, timestamp='', _from='',
                                  to='', sort='desc', pagination=True,
-                                 page=1, limit=50, offset=0):
+                                 page=1, limit=50, offset=0) -> List[Trade]:
         """
         https://max.maicoin.com/documents/api_list#!/public/getApiV2Trades
 
@@ -259,7 +261,8 @@ class Client(object):
             'offset': offset
         }
 
-        return self._send_request('public', 'GET', 'trades', query)
+        result: List[dict] = self._send_request('public', 'GET', 'trades', query)
+        return [Trade(**d) for d in result]
 
     def get_public_server_time(self):
         """
