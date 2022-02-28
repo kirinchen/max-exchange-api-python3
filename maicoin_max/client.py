@@ -128,9 +128,13 @@ class Client(object):
         """
         # End: Debugging with BurpSuite only
 
-        response = urlopen(request, data=data, timeout=self._api_timeout)
+        try:
+            response = urlopen(request, data=data, timeout=self._api_timeout)
 
-        return json.loads(response.read())
+            return json.loads(response.read())
+        except Exception as e:  # work on python 3.x
+            print('Failed to : ' + str(e))
+            raise e
 
     # Public API
     def get_public_all_currencies(self):
