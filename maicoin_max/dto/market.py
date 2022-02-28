@@ -37,7 +37,7 @@ class Trade:
 
 class MarketInfo:
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         """
   {
     "id": "btctwd",
@@ -50,4 +50,12 @@ class MarketInfo:
     "min_quote_amount": 26
   }
         """
-        raise NotImplementedError("MarketInfo")
+        self.id: str = None
+        self.name: str = None
+        self.base_unit: str = None
+        self.base_unit_precision: int = None
+        self.min_base_amount: float = None
+        self.quote_unit: str = None
+        self.quote_unit_precision: int = None
+        self.min_quote_amount: int = None
+        reflection_util.merge(kwargs, self)

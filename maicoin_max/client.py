@@ -11,7 +11,7 @@ from urllib.request import Request
 from urllib.request import urlopen
 
 from .constants import *
-from .dto.market import Candlestick, Trade
+from .dto.market import Candlestick, Trade, MarketInfo
 from .dto.order import Order
 from .dto.position import Position
 from .dto.wallet import Wallet
@@ -142,14 +142,15 @@ class Client(object):
 
         return self._send_request('public', 'GET', 'currencies')
 
-    def get_public_all_markets(self):
+    def get_public_all_markets(self) -> List[MarketInfo]:
         """ma
         https://max.maicoin.com/documents/api_list#!/public/getApiV2Markets
 
         :return: a list contains all available markets
         """
 
-        return self._send_request('public', 'GET', 'markets')
+        result: List[dict] = self._send_request('public', 'GET', 'markets')
+        return [MarketInfo(**d) for d in result]
 
     def get_public_all_tickers(self, pair=None):
         """
