@@ -700,7 +700,8 @@ class Client(object):
 
         return self._send_request('private', 'POST', 'orders/clear', {}, form)
 
-    def set_private_create_order(self, pair, side, amount, price, stop='', _type='limit', client_id='', group_id=''):
+    def set_private_create_order(self, pair, side, amount, price, stop='', _type='limit', client_id='',
+                                 group_id='') -> Order:
         """
         https://max.maicoin.com/documents/api_list#!/private/postApiV2Orders
 
@@ -732,7 +733,8 @@ class Client(object):
         if group_id is not None and type(group_id) is int:
             form['group_id'] = group_id
 
-        return self._send_request('private', 'POST', 'orders', {}, form)
+        result = self._send_request('private', 'POST', 'orders', {}, form)
+        return Order(**result)
 
     def set_private_create_orders(self, pair, sides=None, amounts=None, prices=None, stops=None, _types=None):
         """
