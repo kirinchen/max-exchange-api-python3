@@ -130,8 +130,8 @@ class Client(object):
 
         try:
             response = urlopen(request, data=data, timeout=self._api_timeout)
-
-            return json.loads(response.read())
+            response_body = response.read()
+            return json.loads(response_body)
         except Exception as e:  # work on python 3.x
             print('Failed to : ' + str(e))
             raise e
@@ -488,8 +488,8 @@ class Client(object):
 
         if group_id is not None and type(group_id) is int:
             query['group_id'] = group_id
-
-        return [Order(**d) for d in self._send_request('private', 'GET', 'orders', query)]
+        result = self._send_request('private', 'GET', 'orders', query)
+        return [Order(**d) for d in result]
 
     def get_private_reward_history(self, currency='', _from='', to='', _type='',
                                    pagination=False, page=1, limit=50, offset=0):
@@ -724,7 +724,7 @@ class Client(object):
             'ord_type': _type.lower()
         }
 
-        if stop is not None and len(stop) > 0:
+        if stop:
             form['stop_price'] = str(stop)
 
         if client_id is not None and len(client_id) > 0:
