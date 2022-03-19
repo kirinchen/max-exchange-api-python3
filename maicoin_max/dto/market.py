@@ -1,14 +1,14 @@
 from typing import List
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from maicoin_max.utils import reflection_util
 
 
 class Candlestick:
 
-    def __init__(self, v_list: List[float]):
+    def __init__(self, period: int, v_list: List[float]):
         self.openAt = datetime.fromtimestamp(v_list[0])
-        self.closeAt = datetime.fromtimestamp(v_list[0])
+        self.closeAt = self.openAt + timedelta(seconds=period * 60)
         self.open = v_list[1]
         self.high = v_list[2]
         self.low = v_list[3]

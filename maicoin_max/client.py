@@ -188,7 +188,7 @@ class Client(object):
         }
 
         result: List[List[float]] = self._send_request('public', 'GET', 'k', query)
-        return [Candlestick(v_list) for v_list in result]
+        return [Candlestick(period,v_list) for v_list in result]
 
     def get_public_markets_summary(self):
         """
